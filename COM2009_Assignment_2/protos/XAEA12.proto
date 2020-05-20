@@ -1,0 +1,195 @@
+PROTO XAEA12 [
+    field SFVec3f    translation  0 0 0
+    field SFRotation rotation     0 1 0 0
+    field SFFloat    bodyMass     1
+]
+{  
+    Robot {
+        translation IS translation
+        rotation IS rotation
+        children [
+            DEF BODY Shape {
+                appearance PBRAppearance {
+                    baseColor 0 0 0
+                }
+                geometry Box {
+                    size 0.15 0.1 0.15
+                }
+            }
+            DEF WHEEL1 HingeJoint {
+                jointParameters HingeJointParameters {
+                    anchor 0.085 -0.03 0.04
+                }
+                device [
+                    RotationalMotor {
+                        name "wheel1"
+                    }
+                ]
+                endPoint Solid {
+                    translation 0.08 -0.03 0.04
+                    rotation 0 0 1 1.5707996938938922
+                    children [
+                        DEF WHEEL Shape {
+                            appearance PBRAppearance {
+                                baseColor 1 0.886275 0.235294
+                                roughness 1
+                            }
+                            geometry Cylinder {
+                                height 0.01
+                                radius 0.03
+                            }
+                        }
+                    ]
+                    name "solid(1)"
+                    boundingObject USE WHEEL
+                    physics Physics {
+                    }
+                }
+            }
+            DEF WHEEL2 HingeJoint {
+                jointParameters HingeJointParameters {
+                    anchor 0.085 -0.03 -0.04
+                }
+                device [
+                    RotationalMotor {
+                        name "wheel2"
+                    }
+                ]
+                endPoint Solid {
+                    translation 0.08 -0.0299912 -0.04
+                    rotation 7.855944391164187e-13 -7.861832227971795e-13 1 1.570799693893887
+                    children [
+                        USE WHEEL
+                    ]
+                    name "solid(2)"
+                    boundingObject USE WHEEL
+                    physics Physics {
+                    }
+                }
+            }
+            DEF WHEEL3 HingeJoint {
+                jointParameters HingeJointParameters {
+                    anchor -0.085 -0.03 0.04
+                }
+                device [
+                    RotationalMotor {
+                        name "wheel3"
+                    }
+                ]
+                endPoint Solid {
+                    translation -0.08 -0.0299911 0.04
+                    rotation 2.929787595465645e-13 -2.911339040135141e-13 1 1.570799693893889
+                    children [
+                        USE WHEEL
+                    ]
+                    name "solid(3)"
+                    boundingObject USE WHEEL
+                    physics Physics {
+                    }
+                }
+            }
+            DEF WHEEL4 HingeJoint {
+                jointParameters HingeJointParameters {
+                    anchor -0.085 -0.03 -0.04
+                }
+                device [
+                    RotationalMotor {
+                        name "wheel4"
+                    }
+                ]
+                endPoint Solid {
+                    translation -0.08 -0.0299912 -0.04
+                    rotation 7.88734618747147e-13 -7.895981681455963e-13 1 1.5707996938938762
+                    children [
+                        USE WHEEL
+                    ]
+                    name "solid(4)"
+                    boundingObject USE WHEEL
+                    physics Physics {
+                    }
+                }
+            }
+            DistanceSensor {
+                translation 0.04 -0.02 0.08
+                rotation 0 1 0 -1.4399003061004252
+                children [
+                    DEF SENSOR Shape {
+                        appearance PBRAppearance {
+                            baseColor 1 0.666667 0
+                        }
+                        geometry Box {
+                            size 0.01 0.01 0.01
+                        }
+                    }
+                ]
+                name "ds_front_left"
+            }
+            DistanceSensor {
+                translation -0.04 -0.02 0.08
+                rotation 0 1 0 -1.7016996938995748
+                children [
+                    DEF SENSOR Shape {
+                        appearance PBRAppearance {
+                            baseColor 1 0.666667 0
+                        }
+                        geometry Box {
+                            size 0.01 0.01 0.01
+                        }
+                    }
+                ]
+                name "ds_front_right"
+            }
+            LightSensor {
+                translation -0.04 0.02 0.08
+                rotation 0 1 0 -1.7016996938995748
+                children [
+                    USE SENSOR
+                ]
+                name "ls_right"
+            }
+            LightSensor {
+                translation 0.04 0.02 0.08
+                rotation 0 1 0 -1.4398996938995747
+                children [
+                    USE SENSOR
+                ]
+                name "ls_left"
+            }
+            DistanceSensor {
+                translation -0.075 0.02 0.04
+                rotation 0 1 0 3.14159
+                children [
+                    DEF SENSOR Shape {
+                        appearance PBRAppearance {
+                            baseColor 1 0.666667 0
+                        }
+                        geometry Box {
+                            size 0.01 0.01 0.01
+                        }
+                    }
+                ]
+                name "ds_right1"
+            }
+            DistanceSensor {
+                translation -0.075 0.02 -0.04
+                rotation 0 1 0 3.14159
+                children [
+                    DEF SENSOR Shape {
+                        appearance PBRAppearance {
+                            baseColor 1 0.666667 0
+                        }
+                        geometry Box {
+                            size 0.01 0.01 0.01
+                        }
+                    }
+                ]
+                name "ds_right2"
+            }
+        ]
+        boundingObject USE BODY
+        physics Physics {
+            mass 2
+        }
+        controller "new_robot_avoid"
+    }
+}

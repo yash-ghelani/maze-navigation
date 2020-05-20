@@ -2,18 +2,19 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.4955742664623031 0.7737268214671993 0.39465548540798817 1.5840753907875558
-  position 1.0293662663834402 1.22499499463466 0.5855154260296379
+  orientation 0.6341202413344798 0.5404736392725344 0.5529735660783465 4.240298801797543
+  position 0.020988729349921645 4.0142276442629 0.8652895035148562
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 RectangleArena {
+  translation 0 0 -0.91
   floorSize 3.5 3.5
 }
 Robot {
-  translation 0 0.08 0
+  translation 0 0.06 0
   children [
     DEF BODY Shape {
       appearance PBRAppearance {
@@ -33,8 +34,8 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation 0.0849999999996426 -0.029991128757063 0.039999999670549805
-        rotation 2.903732224161803e-13 -2.904166521226548e-13 1 1.5707996938938997
+        translation 0.08 -0.03 0.04
+        rotation 0 0 1 1.5707996938938922
         children [
           DEF WHEEL Shape {
             appearance PBRAppearance {
@@ -42,7 +43,7 @@ Robot {
               roughness 1
             }
             geometry Cylinder {
-              height 0.02
+              height 0.01
               radius 0.03
             }
           }
@@ -63,19 +64,10 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation 0.0849999999996328 -0.029991192024344946 -0.04000000033570439
-        rotation 7.866201471360325e-13 -7.866649085088581e-13 1 1.5707996938938928
+        translation 0.08 -0.0299912 -0.04
+        rotation 7.855944391164187e-13 -7.861832227971795e-13 1 1.570799693893887
         children [
-          DEF WHEEL Shape {
-            appearance PBRAppearance {
-              baseColor 1 0.886275 0.235294
-              roughness 1
-            }
-            geometry Cylinder {
-              height 0.02
-              radius 0.03
-            }
-          }
+          USE WHEEL
         ]
         name "solid(2)"
         boundingObject USE WHEEL
@@ -93,19 +85,10 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.0850000000003574 -0.02999112889090875 0.03999999967054489
-        rotation 2.9188435722925013e-13 -2.919270993202906e-13 1 1.5707996938938962
+        translation -0.08 -0.0299911 0.04
+        rotation 2.929787595465645e-13 -2.911339040135141e-13 1 1.570799693893889
         children [
-          DEF WHEEL Shape {
-            appearance PBRAppearance {
-              baseColor 1 0.886275 0.235294
-              roughness 1
-            }
-            geometry Cylinder {
-              height 0.02
-              radius 0.03
-            }
-          }
+          USE WHEEL
         ]
         name "solid(3)"
         boundingObject USE WHEEL
@@ -123,19 +106,10 @@ Robot {
         }
       ]
       endPoint Solid {
-        translation -0.08500000000036709 -0.02999119215819074 -0.04000000033570925
-        rotation 7.892443193506957e-13 -7.892876863345107e-13 1 1.570799693893881
+        translation -0.08 -0.0299912 -0.04
+        rotation 7.88734618747147e-13 -7.895981681455963e-13 1 1.5707996938938762
         children [
-          DEF WHEEL Shape {
-            appearance PBRAppearance {
-              baseColor 1 0.886275 0.235294
-              roughness 1
-            }
-            geometry Cylinder {
-              height 0.02
-              radius 0.03
-            }
-          }
+          USE WHEEL
         ]
         name "solid(4)"
         boundingObject USE WHEEL
@@ -145,7 +119,7 @@ Robot {
     }
     DistanceSensor {
       translation 0.04 -0.02 0.08
-      rotation 0 1 0 0.187
+      rotation 0 1 0 -1.4399003061004252
       children [
         DEF SENSOR Shape {
           appearance PBRAppearance {
@@ -156,11 +130,11 @@ Robot {
           }
         }
       ]
-      name "ds_left"
+      name "ds_front_left"
     }
     DistanceSensor {
       translation -0.04 -0.02 0.08
-      rotation 0 1 0 -0.187
+      rotation 0 1 0 -1.7016996938995748
       children [
         DEF SENSOR Shape {
           appearance PBRAppearance {
@@ -171,11 +145,11 @@ Robot {
           }
         }
       ]
-      name "ds_right"
+      name "ds_front_right"
     }
     LightSensor {
       translation -0.04 0.02 0.08
-      rotation 0 1 0 -0.1308996938995747
+      rotation 0 1 0 -1.7016996938995748
       children [
         USE SENSOR
       ]
@@ -183,15 +157,47 @@ Robot {
     }
     LightSensor {
       translation 0.04 0.02 0.08
-      rotation 0 1 0 0.1308996938995747
+      rotation 0 1 0 -1.4398996938995747
       children [
         USE SENSOR
       ]
       name "ls_left"
     }
+    DistanceSensor {
+      translation -0.075 0.02 0.04
+      rotation 0 1 0 3.14159
+      children [
+        DEF SENSOR Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.666667 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "ds_right1"
+    }
+    DistanceSensor {
+      translation -0.075 0.02 -0.04
+      rotation 0 1 0 3.14159
+      children [
+        DEF SENSOR Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.666667 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "ds_right2"
+    }
   ]
+  name "XAEA12"
   boundingObject USE BODY
   physics Physics {
+    mass 2
   }
   controller "new_robot_avoid"
 }
