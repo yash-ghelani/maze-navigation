@@ -45,6 +45,10 @@ def turn(count, direction):
         wheels[3].setVelocity(rightSpeed)
         count -= 1
         print("turning")
+
+#getting the robot started
+turn(10, "r")
+
         
 while robot.step(TIME_STEP) != -1: 
       
@@ -54,7 +58,9 @@ while robot.step(TIME_STEP) != -1:
     if ds[0].getValue() < 850 or ds[1].getValue() < 850:
         turn(10, "l")
     
-    #if math.floor(ds[2].getValue() / 10) < ds[3].getValue():
+    if ds[2].getValue() == 1000 and ds[3].getValue() != 1000:
+        turn(4, "s")
+        turn(10, "r")
     
     if ds[2].getValue() < ds[3].getValue():
         turn(1, "l")
