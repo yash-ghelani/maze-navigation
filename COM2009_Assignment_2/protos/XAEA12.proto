@@ -145,7 +145,7 @@ PROTO XAEA12 [
                 children [
                     USE SENSOR
                 ]
-                name "ls_right"
+                name "ls_front_right"
             }
             LightSensor {
                 translation 0.04 0.02 0.08
@@ -153,7 +153,7 @@ PROTO XAEA12 [
                 children [
                     USE SENSOR
                 ]
-                name "ls_left"
+                name "ls__front_left"
             }
             DistanceSensor {
                 translation -0.075 0.02 0.04
@@ -184,6 +184,14 @@ PROTO XAEA12 [
                     }
                 ]
                 name "ds_right2"
+            }
+            LightSensor {
+                translation -0.075 0.02 0.00
+                rotation 0 1 0 3.14159
+                children [
+                    USE SENSOR
+                ]
+                name "ls_right"
             }
         ]
         boundingObject USE BODY
