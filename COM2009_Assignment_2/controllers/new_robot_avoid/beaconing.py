@@ -1,6 +1,8 @@
 from controller import Robot, Motor, DistanceSensor, LightSensor
+import math
 
 TIME_STEP = 64
+SPEED = 7.0
 robot = Robot()
 
 ds = []
@@ -48,9 +50,11 @@ def turn(count, direction):
         count -= 1
         print("turning")
         
+#detect colour
+target_colour = ls[2].getValues()
+        
 while robot.step(TIME_STEP) != -1: 
-    #detect colour
-    target_colour = ls[2].getValues()
+    
     lsr_colour = ls[0].getValues()
     lsl_colour = ls[1].getValues()
     
@@ -78,6 +82,5 @@ while robot.step(TIME_STEP) != -1:
         wheels[2].setVelocity(rightSpeed)
         wheels[3].setVelocity(rightSpeed)
 
-    
-    leftSpeed = SPEED
-    rightSpeed = SPEED
+    leftSpeed = 0
+    rightSpeed = 0
