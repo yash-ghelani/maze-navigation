@@ -1,22 +1,18 @@
-from controller import Robot, Motor, DistanceSensor, LightSensor
+from controller import Robot, Motor, DistanceSensor, LightSensor, Camera
 import math
 
 TIME_STEP = 64
-SPEED = 7.0
+SPEED = 10.0
 robot = Robot()
 
 ds = []
 dsNames = ['ds_front_right', 'ds_front_left', 'ds_right1', 'ds_right2']
 ls = []
-lsNames = ['ls_front_right', 'ls_front_left','ls_right']
+lsNames = ['ls_right', 'ls_left']
 
 for i in range(4):
     ds.append(robot.getDistanceSensor(dsNames[i]))
     ds[i].enable(TIME_STEP)
-    
-for i in range(3):
-    ls.append(robot.getLightSensor(lsNames[i]))
-    ls[i].enable(TIME_STEP)
     
 wheels = []
 wheelsNames = ['wheel1', 'wheel2', 'wheel3', 'wheel4']
@@ -26,6 +22,11 @@ for i in range(4):
     wheels[i].setPosition(float('inf'))
     wheels[i].setVelocity(0.0)
     
+camera = wb_robot_get_device("camera");
+camera.enable(TIME_STEP);
+width = wb_camera_get_width(camera);
+height = wb_camera_get_height(camera);
+  
 def turn(count, direction):
     print(ds[2].getValue(), ds[3].getValue())
     while robot.step(TIME_STEP) != -1 and count > 0:
@@ -49,38 +50,56 @@ def turn(count, direction):
         wheels[3].setVelocity(rightSpeed)
         count -= 1
         print("turning")
-        
-#detect colour
-target_colour = ls[2].getValues()
-        
-while robot.step(TIME_STEP) != -1: 
-    
-    lsr_colour = ls[0].getValues()
-    lsl_colour = ls[1].getValues()
-    
-    while ((ls[0].getValues() or ls[1].getValues()) != target_colour) and 
-      (ds[0].getValue() < 850 or ds[1].getValue() < 850):
-        leftSpeed = SPEED
-        rightSpeed = SPEED
-        
-        lsr_colour = ls[0].getValues()
-        lsl_colour = ls[1].getValues()
-        
-        if ds[0].getValue() < 850 or ds[1].getValue() < 850:
-            turn(10, "l")
-        
-        #if math.floor(ds[2].getValue() / 10) < ds[3].getValue():
-        
-        if ds[2].getValue() < ds[3].getValue():
-            turn(1, "l")
-        
-        if ds[2].getValue() > ds[3].getValue():
-            turn(1, "r")
-                             
-        wheels[0].setVelocity(leftSpeed)
-        wheels[1].setVelocity(leftSpeed)
-        wheels[2].setVelocity(rightSpeed)
-        wheels[3].setVelocity(rightSpeed)
 
-    leftSpeed = 0
-    rightSpeed = 0
+image = camera.getImage()
+
+#get the pixel from the middle of the image    
+for x in range(width/3, 2*width/3):
+    for y in range(height/3, 2*height/3:
+        red += wb_camera_image_get_red(image, width, x, y);
+        blue += wb_camera_image_get_blue(image, width, x, y);
+        green += wb_camera_image_get_green(image, width, x, y);
+    
+target = [red,blue,green]
+
+correct = 0
+    
+while robot.step(TIME_STEP) != -1: 
+      
+    leftSpeed = SPEED
+    rightSpeed = SPEED
+    
+    if ds[0].getValue() < 850 or ds[1].getValue() < 850:
+        turn(10, "l")
+    
+    #if math.floor(ds[2].getValue() / 10) < ds[3].getValue():
+    
+    if ds[2].getValue() < ds[3].getValue():
+        turn(1, "l")
+    
+    if ds[2].getValue() > ds[3].getValue():
+        turn(1, "r")
+                         
+    wheels[0].setVelocity(leftSpeed)
+    wheels[1].setVelocity(leftSpeed)
+    wheels[2].setVelocity(rightSpeed)
+    wheels[3].setVelocity(rightSpeed)
+    
+    image = camera.getImage()
+    
+    for x in range(0,camera.getWidth()):
+        for y in range(0,camera.getHeight()):
+            red += wb_camera_image_get_red(image, width, x, y);
+            blue += wb_camera_image_get_blue(image, width, x, y);
+            green += wb_camera_image_get_green(image, width, x, y);
+    
+    colourdetect = [red,blue,green]
+    
+    for x in range(3):
+        if (target[x].getValue() == colourdetect[x].getValue() && correct < 3):
+            correct += 1
+        elif (target[x].getValue() == colourdetect[x].getValue() && correct == 3):    
+            leftSpeed = 0
+            rightSpeed = 0
+        else
+            correct = 0
