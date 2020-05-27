@@ -3,8 +3,8 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation 1 0 0 4.71238898038469
-  position -3.075649650851885e-16 5.102299193988071 -7.327098494625084e-17
+  orientation -0.9969629702368048 -0.061533099239111294 -0.04773377917824512 1.3224935871374943
+  position 1.0862808824675927 3.995528153981156 0.44342804730253826
   followType "Pan and Tilt Shot"
 }
 TexturedBackground {
@@ -249,4 +249,5 @@ StartZone {
   ]
 }
 XAEA12 {
+  translation 1.47 0.065 -1.47
 }

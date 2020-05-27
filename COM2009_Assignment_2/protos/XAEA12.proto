@@ -141,19 +141,27 @@ PROTO XAEA12 [
             }
             LightSensor {
                 translation -0.04 0.02 0.08
-                rotation 0 1 0 -1.7016996938995748
+                rotation 0 1 0 -1.96
                 children [
                     USE SENSOR
                 ]
-                name "ls_front_right"
+                name "ls_right"
+                recognitionColors [
+                    0 0 1
+                ]
+                colorFilter 0 0 1
             }
             LightSensor {
                 translation 0.04 0.02 0.08
-                rotation 0 1 0 -1.4398996938995747
+                rotation 0 1 0 -1.18
                 children [
                     USE SENSOR
                 ]
-                name "ls__front_left"
+                name "ls_left"
+                recognitionColors [
+                    0 0 1
+                ]
+                colorFilter 0 0 1
             }
             DistanceSensor {
                 translation -0.075 0.02 0.04
@@ -184,14 +192,6 @@ PROTO XAEA12 [
                     }
                 ]
                 name "ds_right2"
-            }
-            LightSensor {
-                translation -0.075 0.02 0.00
-                rotation 0 1 0 3.14159
-                children [
-                    USE SENSOR
-                ]
-                name "ls_right"
             }
         ]
         boundingObject USE BODY

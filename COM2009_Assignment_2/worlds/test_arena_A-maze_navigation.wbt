@@ -3,8 +3,9 @@ WorldInfo {
   basicTimeStep 16
 }
 Viewpoint {
-  orientation -0.9999989573328619 -0.0013458093457876456 -0.0005235746304799831 0.7420470314275512
-  position -1.2115866857723288 2.295745769186993 3.0337909558283727
+  orientation 0.999983205998438 0.004258630856097441 0.003930875769699723 4.792372239943452
+  position -0.1340656575924497 5.078894656480323 0.739879393102076
+  follow "robot"
   followType "Pan and Tilt Shot"
 }
 TexturedBackground {
@@ -123,7 +124,7 @@ DEF MAZE_WALLS Group {
       length 0.88
     }
     MazeWall {
-      translation -0.840003 0.15 -0.885
+      translation -0.840003 0.15 -0.88
       rotation 0 -1 0 1.5707896938995747
       name "maze wall custom(8)"
       length 0.8
@@ -177,7 +178,7 @@ DEF MAZE_WALLS Group {
       length 0.44
     }
     MazeWall {
-      translation 0.539 0.15 1.519
+      translation 0.545 0.15 1.519
       rotation 0 -1 0 1.5707896938995747
       name "maze wall custom(17)"
       length 0.44
@@ -263,6 +264,6 @@ DEF MAZE_WALLS Group {
   ]
 }
 XAEA12 {
-  translation -1.473 0.06 1.535
+  translation -1.523 0.06 1.535
   rotation 0 1 0 -3.1415853071795863
 }

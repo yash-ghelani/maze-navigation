@@ -1,4 +1,4 @@
-from controller import Robot, Motor, DistanceSensor, LightSensor
+from controller import Robot, Motor, DistanceSensor, Camera, CameraRecognitionObject
 import math
 
 TIME_STEP = 64
@@ -7,16 +7,14 @@ robot = Robot()
 
 ds = []
 dsNames = ['ds_front_right', 'ds_front_left', 'ds_right1', 'ds_right2', 'ds_right3']
-ls = []
-lsNames = ['ls_right', 'ls_left']
+
+cam = robot.getCamera('cam1')
+cam.enable(TIME_STEP)
+cam.recognitionEnable(TIME_STEP)
 
 for i in range(5):
     ds.append(robot.getDistanceSensor(dsNames[i]))
     ds[i].enable(TIME_STEP)
-    
-for i in range(2):    
-    ls.append(robot.getLightSensor(lsNames[i]))
-    ls[i].enable(TIME_STEP)
     
 wheels = []
 wheelsNames = ['wheel1', 'wheel2', 'wheel3', 'wheel4']
@@ -64,8 +62,18 @@ def almostStraight():
         return False
 
 #getting the robot started
+turn(10, "s")
+print(cam.getCameraRecognitionObject(0).get_colors)
+turn(10, "stop")
+
 turn(7, "r")
-blueCount = 0
+print(cam.getCameraRecognitionObject(0).get_colors)
+turn(10, "stop")
+
+turn(7, "r")
+print(cam.getCameraRecognitionObject(0).get_colors)
+turn(10, "stop")
+
 
 #wall following algorithm        
 while robot.step(TIME_STEP) != -1: 

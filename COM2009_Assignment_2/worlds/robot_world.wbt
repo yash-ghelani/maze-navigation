@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.6341202413344798 0.5404736392725344 0.5529735660783465 4.240298801797543
-  position 0.020988729349921645 4.0142276442629 0.8652895035148562
+  orientation 0.18170839774356218 -0.9682453024620394 -0.17170641353677296 4.772878619454827
+  position 1.8162543748333935 0.8655608104196311 0.09558491619558274
 }
 TexturedBackground {
 }
@@ -13,8 +13,14 @@ RectangleArena {
   translation 0 0 -0.91
   floorSize 3.5 3.5
 }
+StartZone {
+  translation 0 0 -0.51
+  rotation 0 1 0 1.5708
+  colour 0 0 1
+}
 Robot {
-  translation 0 0.06 0
+  translation -2.38823e-07 0.06 0.09
+  rotation 0 1 0 3.14159
   children [
     DEF BODY Shape {
       appearance PBRAppearance {
@@ -149,19 +155,28 @@ Robot {
     }
     LightSensor {
       translation -0.04 0.02 0.08
-      rotation 0 1 0 -1.7016996938995748
+      rotation 0 1 0 -1.9634996938995748
       children [
         USE SENSOR
       ]
       name "ls_right"
+      recognitionColors [
+        0 0 0
+      ]
+      occlusion TRUE
     }
     LightSensor {
       translation 0.04 0.02 0.08
-      rotation 0 1 0 -1.4398996938995747
+      rotation 0 1 0 -1.1781003061004252
       children [
         USE SENSOR
       ]
       name "ls_left"
+      recognitionColors [
+        0 0 0
+      ]
+      colorFilter 0 0 0
+      occlusion TRUE
     }
     DistanceSensor {
       translation -0.075 0.02 0.04
@@ -179,6 +194,21 @@ Robot {
       name "ds_right1"
     }
     DistanceSensor {
+      translation -0.075 0.02 0.06
+      rotation 0 1 0 3.14159
+      children [
+        DEF SENSOR Shape {
+          appearance PBRAppearance {
+            baseColor 1 0.666667 0
+          }
+          geometry Box {
+            size 0.01 0.01 0.01
+          }
+        }
+      ]
+      name "ds_right3"
+    }
+    DistanceSensor {
       translation -0.075 0.02 -0.04
       rotation 0 1 0 3.14159
       children [
@@ -193,11 +223,31 @@ Robot {
       ]
       name "ds_right2"
     }
+    Camera {
+      translation 0 0.06 0.06
+      rotation 0 1 0 -3.141592653589793
+      children [
+        USE SENSOR
+      ]
+      name "cam1"
+      recognition Recognition {
+      }
+    }
+    Camera {
+      translation 0.06 0.06 1.22461e-18
+      rotation 0 -1 0 1.5708
+      children [
+        USE SENSOR
+      ]
+      name "cam2"
+      recognition Recognition {
+      }
+    }
   ]
   name "XAEA12"
   boundingObject USE BODY
   physics Physics {
     mass 2
   }
-  controller "new_robot_avoid"
+  controller "colour_detection"
 }

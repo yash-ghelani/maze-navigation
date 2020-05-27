@@ -7,5 +7,5 @@ centralWidgetVisible: 1
 selectionDisabled: 0
 viewpointLocked: 0
 orthographicViewHeight: 1
-textFiles: 0 "controllers/new_robot_avoid/new_robot_avoid.py"
-globalOptionalRendering: DistanceSensorRays
+textFiles: 0 "controllers/new_robot_avoid/new_robot_avoid.py" "controllers/new_robot_avoid/beaconing.py"
+globalOptionalRendering: LightSensorRays::DistanceSensorRays
