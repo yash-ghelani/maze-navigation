@@ -89,9 +89,9 @@ while robot.step(TIME_STEP) != -1:
     
     for x in range(0,camera.getWidth()):
         for y in range(0,camera.getHeight()):
-            red += wb_camera_image_get_red(image, width, x, y);
-            blue += wb_camera_image_get_blue(image, width, x, y);
-            green += wb_camera_image_get_green(image, width, x, y);
+            red1 += wb_camera_image_get_red(image, width, x, y);
+            blue1 += wb_camera_image_get_blue(image, width, x, y);
+            green1 += wb_camera_image_get_green(image, width, x, y);
     
     colourdetect = [red,blue,green]
     
