@@ -2,19 +2,20 @@ from controller import Robot, Motor, DistanceSensor, Camera, CameraRecognitionOb
 import math
 
 TIME_STEP = 64
-SPEED = 9.0
+SPEED = 10.0
 robot = Robot()
 
+#device setup
 ds = []
 dsNames = ['ds_front_right', 'ds_front_left', 'ds_right1', 'ds_right2', 'ds_right3']
 
 cams = []
 camNames = ['cam1', 'cam2']
+  
+wheels = []
+wheelsNames = ['wheel1', 'wheel2', 'wheel3', 'wheel4']
 
-
-cam = robot.getCamera('cam1')
-
-for i in range(2):
+for i in range(1):
     cams.append(robot.getCamera(camNames[i]))
     cams[i].enable(TIME_STEP)
     cams[i].recognitionEnable(TIME_STEP)
@@ -22,9 +23,6 @@ for i in range(2):
 for i in range(5):
     ds.append(robot.getDistanceSensor(dsNames[i]))
     ds[i].enable(TIME_STEP)
-    
-wheels = []
-wheelsNames = ['wheel1', 'wheel2', 'wheel3', 'wheel4']
 
 for i in range(4):
     wheels.append(robot.getMotor(wheelsNames[i]))
@@ -45,12 +43,6 @@ def turn(count, direction):
         elif direction == "s":
             leftSpeed = SPEED
             rightSpeed = SPEED
-        elif direction == "stop":
-            leftSpeed = 0.0
-            rightSpeed = 0.0
-        else:
-            leftSpeed = SPEED * -1
-            rightSpeed = SPEED
             
         wheels[0].setVelocity(leftSpeed)
         wheels[1].setVelocity(leftSpeed)
@@ -58,22 +50,24 @@ def turn(count, direction):
         wheels[3].setVelocity(rightSpeed)
         count -= 1
 
+#get object colour - try-excepot used for exception handling
 def getColour():
     try:
-        colours = cam.getRecognitionObject(0).get_colors()
+        colours = cams[0].getRecognitionObject(0).get_colors()
     except:
         print("colour detection error")
         colours = [0,0,0]
-
     return colours
 
-#getting the robot started
+#getting target colour of beacon
 turn(7, "r")
 target = getColour()
 print(target)
 beaconFound = False
 
-#wall following algorithm        
+t = 0
+
+#maze algorithm        
 while robot.step(TIME_STEP) != -1 and beaconFound == False: 
       
     leftSpeed = SPEED
@@ -81,18 +75,19 @@ while robot.step(TIME_STEP) != -1 and beaconFound == False:
     
     if ds[0].getValue() < 1000 or ds[1].getValue() < 1000:
         
-        print("checking if wall or beacon")        
-        try:
+        print(t)
+        if t >= 20:
+            print("checking if wall or beacon")               
             if getColour() == target:
                 beaconFound == True
             else:
                 turn(7, "l")
-        except:
-            print("colour detection error")
-            turn(8, "l")
+                t = 0
+        else:
+            turn(7, "l")  
         
     elif ds[2].getValue() == 1000 and ds[4].getValue() == 1000 and ds[3].getValue() != 1000:
-        turn(3, "s")
+        turn(2, "s")
         turn(7, "r")
     
     if ds[2].getValue() < ds[3].getValue():
@@ -105,5 +100,7 @@ while robot.step(TIME_STEP) != -1 and beaconFound == False:
     wheels[1].setVelocity(leftSpeed)
     wheels[2].setVelocity(rightSpeed)
     wheels[3].setVelocity(rightSpeed)
+    
+    t += 1
     
 print("beacon found, ending sequence")
