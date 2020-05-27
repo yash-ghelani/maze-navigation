@@ -58,16 +58,6 @@ def turn(count, direction):
         wheels[3].setVelocity(rightSpeed)
         count -= 1
 
-def almostStraight():
-
-    val1 = math.floor(ds[2].getValue()/10)
-    val2 = math.floor(ds[3].getValue()/10)
-    
-    if val1 == val2 and ds[2].getValue() != 1000 and ds[3].getValue() != 1000:
-        return True
-    else:
-        return False
-
 def getColour():
     try:
         colours = cam.getRecognitionObject(0).get_colors()
@@ -91,6 +81,7 @@ while robot.step(TIME_STEP) != -1 and beaconFound == False:
     
     if ds[0].getValue() < 1000 or ds[1].getValue() < 1000:
         
+        print("checking if wall or beacon")        
         try:
             if getColour() == target:
                 beaconFound == True
@@ -115,4 +106,4 @@ while robot.step(TIME_STEP) != -1 and beaconFound == False:
     wheels[2].setVelocity(rightSpeed)
     wheels[3].setVelocity(rightSpeed)
     
- 
+print("beacon found, ending sequence")
