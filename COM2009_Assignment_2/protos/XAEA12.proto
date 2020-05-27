@@ -139,30 +139,7 @@ PROTO XAEA12 [
                 ]
                 name "ds_front_right"
             }
-            LightSensor {
-                translation -0.04 0.02 0.08
-                rotation 0 1 0 -1.96
-                children [
-                    USE SENSOR
-                ]
-                name "ls_right"
-                recognitionColors [
-                    0 0 1
-                ]
-                colorFilter 0 0 1
-            }
-            LightSensor {
-                translation 0.04 0.02 0.08
-                rotation 0 1 0 -1.18
-                children [
-                    USE SENSOR
-                ]
-                name "ls_left"
-                recognitionColors [
-                    0 0 1
-                ]
-                colorFilter 0 0 1
-            }
+
             DistanceSensor {
                 translation -0.075 0.02 0.04
                 rotation 0 1 0 3.14159
@@ -193,6 +170,44 @@ PROTO XAEA12 [
                 ]
                 name "ds_right2"
             }
+
+            DistanceSensor {
+                translation -0.075 0.02 0.06
+                rotation 0 1 0 3.14159
+                children [
+                    DEF SENSOR Shape {
+                        appearance PBRAppearance {
+                            baseColor 1 0.666667 0
+                        }
+                        geometry Box {
+                            size 0.01 0.01 0.01
+                        }
+                    }
+                ]
+                name "ds_right3"
+            }
+
+            Camera {
+                translation 0 0.06 0.06
+                rotation 0 1 0 -3.141592653589793
+                children [
+                    USE SENSOR
+                ]
+                name "cam1"
+                recognition Recognition {
+                }
+            }
+            Camera {
+                translation 0.06 0.06 1.22461e-18
+                rotation 0 -1 0 1.5708
+                children [
+                    USE SENSOR
+                ]
+                name "cam2"
+                recognition Recognition {
+                }
+            }
+
         ]
         boundingObject USE BODY
         physics Physics {

@@ -61,18 +61,27 @@ def almostStraight():
     else:
         return False
 
+def getColour():
+    cameraData = cam.getImage()
+
+    r = Camera.imageGetRed(cameraData, cam.getWidth(), 32, 32)
+    g = Camera.imageGetGreen(cameraData, cam.getWidth(), 32, 32)
+    b = Camera.imageGetBlue(cameraData, cam.getWidth(), 32, 32)
+    
+    colours = [r,g,b]
+    
+    return colours
+
 #getting the robot started
-turn(10, "s")
-print(cam.getCameraRecognitionObject(0).get_colors)
-turn(10, "stop")
 
-turn(7, "r")
-print(cam.getCameraRecognitionObject(0).get_colors)
-turn(10, "stop")
 
-turn(7, "r")
-print(cam.getCameraRecognitionObject(0).get_colors)
-turn(10, "stop")
+# turn(7, "r")
+# print(cam.getCameraRecognitionObject(0).get_colors)
+# turn(10, "stop")
+
+# turn(7, "r")
+# print(cam.getCameraRecognitionObject(0).get_colors)
+# turn(10, "stop")
 
 
 #wall following algorithm        
@@ -89,6 +98,8 @@ while robot.step(TIME_STEP) != -1:
         # break
     
     if ds[0].getValue() < 850 or ds[1].getValue() < 850:
+        colours = getColour()
+        print(colours)
         turn(7, "l")
         
     elif ds[2].getValue() == 1000 and ds[4].getValue() == 1000 and ds[3].getValue() != 1000:

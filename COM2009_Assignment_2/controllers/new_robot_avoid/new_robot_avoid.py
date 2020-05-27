@@ -1,4 +1,4 @@
-from controller import Robot, Motor, DistanceSensor, LightSensor
+from controller import Robot, Motor, DistanceSensor, Camera, CameraRecognitionObject
 import math
 
 TIME_STEP = 64
@@ -7,16 +7,21 @@ robot = Robot()
 
 ds = []
 dsNames = ['ds_front_right', 'ds_front_left', 'ds_right1', 'ds_right2', 'ds_right3']
-ls = []
-lsNames = ['ls_right', 'ls_left']
+
+cams = []
+camNames = ['cam1', 'cam2']
+
+
+cam = robot.getCamera('cam1')
+
+for i in range(2):
+    cams.append(robot.getCamera(camNames[i]))
+    cams[i].enable(TIME_STEP)
+    cams[i].recognitionEnable(TIME_STEP)
 
 for i in range(5):
     ds.append(robot.getDistanceSensor(dsNames[i]))
     ds[i].enable(TIME_STEP)
-    
-for i in range(2):    
-    ls.append(robot.getLightSensor(lsNames[i]))
-    ls[i].enable(TIME_STEP)
     
 wheels = []
 wheelsNames = ['wheel1', 'wheel2', 'wheel3', 'wheel4']
@@ -63,25 +68,37 @@ def almostStraight():
     else:
         return False
 
+def getColour():
+    try:
+        colours = cam.getRecognitionObject(0).get_colors()
+    except:
+        print("colour detection error")
+        colours = [0,0,0]
+
+    return colours
+
 #getting the robot started
 turn(7, "r")
-blueCount = 0
+target = getColour()
+print(target)
+beaconFound = False
 
 #wall following algorithm        
-while robot.step(TIME_STEP) != -1: 
+while robot.step(TIME_STEP) != -1 and beaconFound == False: 
       
     leftSpeed = SPEED
     rightSpeed = SPEED
     
-    # #if colour is same as start zone colour, stop.
-    # if ls[0].getValue() >= 333 and blueCount < 230:
-        # blueCount += 1
-    # else:
-        # turn(1, "stop")
-        # break
-    
-    if ds[0].getValue() < 850 or ds[1].getValue() < 850:
-        turn(7, "l")
+    if ds[0].getValue() < 1000 or ds[1].getValue() < 1000:
+        
+        try:
+            if getColour() == target:
+                beaconFound == True
+            else:
+                turn(7, "l")
+        except:
+            print("colour detection error")
+            turn(8, "l")
         
     elif ds[2].getValue() == 1000 and ds[4].getValue() == 1000 and ds[3].getValue() != 1000:
         turn(3, "s")
