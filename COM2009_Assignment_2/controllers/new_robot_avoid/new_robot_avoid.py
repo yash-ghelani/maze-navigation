@@ -1,8 +1,8 @@
 from controller import Robot, Motor, DistanceSensor, Camera, CameraRecognitionObject
 import sys
 
-TIME_STEP = 34
-SPEED = 9
+TIME_STEP = 40
+SPEED = 9.5
 robot = Robot()
 
 #device setup
@@ -101,7 +101,7 @@ while robot.step(TIME_STEP) != -1:
         turn(1, "s")
     
     if (t > 50 and t % 5 == 0) and getColour(1) == target:
-        turn(10,"l")
+        turn(9,"l")
     
                          
     wheels[0].setVelocity(leftSpeed)
