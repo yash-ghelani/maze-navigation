@@ -111,7 +111,7 @@ PROTO XAEA12 [
             }
             DistanceSensor {
                 translation 0.04 -0.02 0.08
-                rotation 0 1 0 -1.4399003061004252
+                rotation 0 1 0 -1.5708
                 children [
                     DEF SENSOR Shape {
                         appearance PBRAppearance {
@@ -126,7 +126,7 @@ PROTO XAEA12 [
             }
             DistanceSensor {
                 translation -0.04 -0.02 0.08
-                rotation 0 1 0 -1.7016996938995748
+                rotation 0 1 0 -1.5708
                 children [
                     DEF SENSOR Shape {
                         appearance PBRAppearance {

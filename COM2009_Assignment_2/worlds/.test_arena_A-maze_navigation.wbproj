@@ -9,3 +9,5 @@ viewpointLocked: 0
 orthographicViewHeight: 1
 textFiles: 0 "controllers/new_robot_avoid/new_robot_avoid.py"
 globalOptionalRendering: DistanceSensorRays
+renderingDevicePerspectives: robot:cam2;1;1;0.0777143;0
+renderingDevicePerspectives: robot:cam1;1;1;0;0

@@ -1,8 +1,8 @@
 from controller import Robot, Motor, DistanceSensor, Camera, CameraRecognitionObject
-import sys
+import math
 
-TIME_STEP = 40
-SPEED = 9.5
+TIME_STEP = 64
+SPEED = 8
 robot = Robot()
 
 #device setup
@@ -61,52 +61,47 @@ def getColour(index):
     return obstacleColour
 
 #getting target colour of beacon
-turn(8, "r")
+turn(7, "r")
 turn(4, "s")
 target = getColour(0)
 print(target)
-turn(8, "l")
-
-t = 0
+beaconFound = False
+turn(7, "l")
 
 #maze algorithm        
-while robot.step(TIME_STEP) != -1:       
+while robot.step(TIME_STEP) != -1 and beaconFound == False: 
+      
     leftSpeed = SPEED
     rightSpeed = SPEED
     
     if ds[0].getValue() < 1000 or ds[1].getValue() < 1000:
-        print("checking if wall or beacon")             
-        if getColour(0) == target and t > 50:
+
+        print("checking if wall or beacon")
+             
+        if getColour(0) == target:
             print("found")
-            wheels[0].setVelocity(0.0)
-            wheels[1].setVelocity(0.0)
-            wheels[2].setVelocity(0.0)
-            wheels[3].setVelocity(0.0)
-            sys.exit()
+            beaconFound == True
         else:
-            turn(8, "l")
+            turn(7, "l")
        
-    elif ds[2].getValue() == 1000 and ds[4].getValue() == 1000 and ds[3].getValue() < 1000:       
-        print("turning corner")        
+    elif ds[2].getValue() == 1000 and ds[4].getValue() == 1000 and ds[3].getValue() != 1000:
+        
+        print("turning corner")
+        
         turn(4, "s")
-        turn(8, "r")
+        turn(7, "r")
     
     #microadjustments to stick to wall
-    elif ds[2].getValue() < ds[3].getValue():
+    if ds[2].getValue() < ds[3].getValue():
         turn(1, "l")
     elif ds[2].getValue() > ds[3].getValue():
         turn(1, "r")
     else:
         turn(1, "s")
-    
-    if (t > 50 and t % 5 == 0) and getColour(1) == target:
-        turn(9,"l")
-    
                          
     wheels[0].setVelocity(leftSpeed)
     wheels[1].setVelocity(leftSpeed)
     wheels[2].setVelocity(rightSpeed)
     wheels[3].setVelocity(rightSpeed)
     
-    t += 1
-
+print("beacon found, ending sequence")

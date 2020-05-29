@@ -9,6 +9,6 @@ viewpointLocked: 0
 orthographicViewHeight: 1
 textFiles: 0 "controllers/new_robot_avoid/new_robot_avoid.py" "controllers/colour_detection/colour_detection.py"
 globalOptionalRendering: DistanceSensorRays
-renderingDevicePerspectives: XAEA12:cam1;1;1.45313;0;0
-renderingDevicePerspectives: XAEA12:camera;1;1;0;0
 renderingDevicePerspectives: XAEA12:cam2;1;1.45313;0.103149;0
+renderingDevicePerspectives: XAEA12:camera;1;1;0;0
+renderingDevicePerspectives: XAEA12:cam1;1;1.45313;0;0
