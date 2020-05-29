@@ -1,8 +1,8 @@
 from controller import Robot, Motor, DistanceSensor, Camera, CameraRecognitionObject
 import sys
 
-TIME_STEP = 35
-SPEED = 9.1
+TIME_STEP = 34
+SPEED = 9
 robot = Robot()
 
 #device setup
@@ -55,7 +55,7 @@ def getColour(index):
     try:
         obstacleColour = cams[index].getRecognitionObjects()[0].get_colors()
     except:
-        print("camera issue")
+        print("beacon not detected")
         obstacleColour = [0,0,0]
         
     return obstacleColour
@@ -75,7 +75,7 @@ while robot.step(TIME_STEP) != -1:
     rightSpeed = SPEED
     
     if ds[0].getValue() < 1000 or ds[1].getValue() < 1000:
-        print("checking if wall or beacon")             
+        #checking if wall or beacon            
         if getColour(0) == target and t > 50:
             print("found")
             wheels[0].setVelocity(0.0)
@@ -84,11 +84,12 @@ while robot.step(TIME_STEP) != -1:
             wheels[3].setVelocity(0.0)
             sys.exit()
         else:
-            turn(9, "l")
-       
+            turn(8, "l")
+    
+    #turning corner   
     elif ds[2].getValue() == 1000 and ds[4].getValue() == 1000 and ds[3].getValue() < 1000:       
         print("turning corner")        
-        turn(4, "s")
+        turn(3, "s")
         turn(9, "r")
     
     #microadjustments to stick to wall
