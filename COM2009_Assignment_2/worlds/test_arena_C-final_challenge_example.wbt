@@ -317,10 +317,10 @@ DEF BEACONS Group {
 StartZone {
   translation -1.03729 0 1.48256
   rotation 0 1 0 -1.5707996938995747
-  colour 0 0 0.5
+  colour 1 0 1
   name "start zone C"
   recColSlot [
-    0 0 0.5
+    1 0 1
   ]
 }
 XAEA12 {

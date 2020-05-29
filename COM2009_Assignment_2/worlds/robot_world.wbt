@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.8242006270257611 0.48847355873581527 0.28650813047156287 1.215411411204334
-  position 0.06531750155020272 1.5888949615022143 -0.8779298990706168
+  orientation -0.9101859566272347 0.28681211768007847 0.2988316139742151 1.6849802882997424
+  position -0.4988578404701655 1.391979528968689 -1.29054631533772
 }
 TexturedBackground {
 }
@@ -125,7 +125,7 @@ Robot {
     }
     DistanceSensor {
       translation 0.04 -0.02 0.08
-      rotation 0 1 0 -1.5708003061004252
+      rotation 0 1 0 -1.35
       children [
         DEF SENSOR Shape {
           appearance PBRAppearance {
@@ -140,7 +140,7 @@ Robot {
     }
     DistanceSensor {
       translation -0.04 -0.02 0.08
-      rotation 0 1 0 -1.5707996938995747
+      rotation 0 1 0 -1.75
       children [
         DEF SENSOR Shape {
           appearance PBRAppearance {

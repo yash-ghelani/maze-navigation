@@ -1,7 +1,6 @@
 PROTO XAEA12 [
     field SFVec3f    translation  0 0 0
     field SFRotation rotation     0 1 0 0
-    field SFFloat    bodyMass     1
 ]
 {  
     Robot {
@@ -111,7 +110,7 @@ PROTO XAEA12 [
             }
             DistanceSensor {
                 translation 0.04 -0.02 0.08
-                rotation 0 1 0 -1.5708
+                rotation 0 1 0 -1.35
                 children [
                     DEF SENSOR Shape {
                         appearance PBRAppearance {
@@ -126,7 +125,7 @@ PROTO XAEA12 [
             }
             DistanceSensor {
                 translation -0.04 -0.02 0.08
-                rotation 0 1 0 -1.5708
+                rotation 0 1 0 -1.75
                 children [
                     DEF SENSOR Shape {
                         appearance PBRAppearance {
@@ -211,7 +210,6 @@ PROTO XAEA12 [
         ]
         boundingObject USE BODY
         physics Physics {
-            mass 2
         }
         controller "new_robot_avoid"
     }
