@@ -1,4 +1,4 @@
-# COM3008 Robotics - Maze Navigation Robot
+# Maze Navigation Robot
 
 ## Objective
 
