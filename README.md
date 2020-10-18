@@ -1,4 +1,4 @@
-# Maze Navigation Robot
+# Designing a Self Navigating Robot
 
 ## Objective
 
